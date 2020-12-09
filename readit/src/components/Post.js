@@ -6,7 +6,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'
 import SideBar from './Sidebar'
 import Comments from './Comments'
 import { checkLoggedIn } from '../utils/checkLoggedIn'
-import { upVoteSinglePost, downVoteSinglePost, setSinglePost, setComments, deletePost } from '../action/index'
+import { upVoteSinglePost, downVoteSinglePost, setSinglePost, setComments, deletePost, upVotePost } from '../action/index'
 
 
 
@@ -40,6 +40,7 @@ function Post(props) {
     const upVoteHandler = (post_id) => {
         if (checkLoggedIn()) {
             props.upVoteSinglePost(post_id)
+            props.upVotePost(post_id)
             axios.put(`/api/post/upvote/${post_id}`)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
@@ -129,4 +130,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { upVoteSinglePost, downVoteSinglePost, setSinglePost, setComments, deletePost })(Post)
+export default connect(mapStateToProps, { upVoteSinglePost, downVoteSinglePost, setSinglePost, setComments, deletePost, upVotePost })(Post)
