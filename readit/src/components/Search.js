@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import axios from '../utils/axios'
 import { searchPosts, getPosts } from '../action/index'
 
 function Search(props) {
@@ -9,13 +10,28 @@ function Search(props) {
     }
 
     const submitHandler = (e) => {
+        console.log("in submit", searchString)
         e.preventDefault()
-        props.searchPosts(searchString)
 
+        axios.get('/api/post')
+            .then(res => {
+                props.getPosts(res.data)
+                props.searchPosts(searchString)
+
+            })
+            .catch(err => console.log(err))
     }
+
+    const clearSearch = (e) => {
+        e.preventDefault()
+        setSearchString('')
+        axios.get('/api/post')
+            .then(res => { props.getPosts(res.data) }).catch(err => console.log(err))
+    }
+
     return (
         <div className="search-container">
-            <form onSubmit={submitHandler}>
+            <form >
                 <input
                     type="text"
                     name="searchString"
@@ -23,8 +39,11 @@ function Search(props) {
                     placeholder="Search Posts"
                     onChange={changeHandler}
                 />
-                <button className="search-button">
+                <button onClick={submitHandler} className="search-button">
                     <i class="fa fa-search"></i>
+                </button>
+                <button onClick={clearSearch} className="search-button">
+                    <i class="fa fa-window-close"></i>
                 </button>
             </form>
         </div>

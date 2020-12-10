@@ -526,9 +526,12 @@ html{
    padding: 3px;
 }
 
-.fa-search{
+.fa-search, .fa-window-close{
    cursor: pointer;
-   
+}
+
+.fa-window-close{
+   font-size: 1.6rem;
 }
 .err-msg{
    text-align: center;

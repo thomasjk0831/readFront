@@ -17,10 +17,13 @@ function App() {
       <Header />
 
       {/* allows component to re-render even if already inside component by passing in random key */}
-      <Route
+      {/* <Route
         exact path="/"
         render={(props) => <MainPage key={props.location.key} />}
-      />
+      /> */}
+      <Route exact path="/">
+        <MainPage />
+      </Route>
 
       <Route exact path='/login'>
         <Login />
