@@ -10,7 +10,6 @@ function Search(props) {
     }
 
     const submitHandler = (e) => {
-        console.log("in submit", searchString)
         e.preventDefault()
 
         axios.get('/api/post')
